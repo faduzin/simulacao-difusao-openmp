@@ -9,6 +9,7 @@
 #define D 0.1  // Coeficiente de difusão
 #define DELTA_T 0.01
 #define DELTA_X 1.0
+#define NUM_THREADS 2
 
 void diff_eq(double **C, double **C_new) {
     for (int t = 0; t < T; t++) {
@@ -37,6 +38,7 @@ void diff_eq(double **C, double **C_new) {
 
 int main() {
     // Concentração inicial
+    omp_set_num_threads(NUM_THREADS);
     double **C = (double **)malloc(N * sizeof(double *));
     if (C == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
@@ -81,7 +83,7 @@ int main() {
 
     // Exibir resultado para verificação
     printf("Concentração final no centro: %f\n", C[N/2][N/2]);
-    printf("Tempo de execucao (Parallel): %f segundos\n", time_parallel);
+    printf("Tempo de execução (Parallel): %f segundos\n", time_parallel);
 
     // Liberar memória
     for (int i = 0; i < N; i++) {
