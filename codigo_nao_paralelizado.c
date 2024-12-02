@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
+
 #define N 2000  // Tamanho da grade
 #define T 500 // Número de iterações no tempo
 #define D 0.1  // Coeficiente de difusão
@@ -72,9 +74,14 @@ int main() {
     C[N/2][N/2] = 1.0;
 
     // Executar as iterações no tempo para a equação de difusão
+    clock_t start_serial = clock();
     diff_eq(C, C_new);
-
+    clock_t end_serial = clock();
+    double time_serial = (double)(end_serial - start_serial)/CLOCKS_PER_SEC;
+    
     // Exibir resultado para verificação
     printf("Concentração final no centro: %f\n", C[N/2][N/2]);
+    printf("\nTempo de execucao (Serial): %f segundos\n", time_serial);
+    
     return 0;
 }
