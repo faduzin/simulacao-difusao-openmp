@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <omp.h>
+#include <time.h>
 
 #define N 2000  // Tamanho da grade
 #define T 500 // Número de iterações no tempo
@@ -73,10 +74,14 @@ int main() {
     C[N/2][N/2] = 1.0;
 
     // Executar as iterações no tempo para a equação de difusão
+    clock_t start_parallel = clock();
     diff_eq(C, C_new);
+    clock_t end_parallel = clock();
+    double time_parallel = (double)(end_parallel - start_parallel) / CLOCKS_PER_SEC;
 
     // Exibir resultado para verificação
     printf("Concentração final no centro: %f\n", C[N/2][N/2]);
+    printf("Tempo de execucao (Parallel): %f segundos\n", time_parallel);
 
     // Liberar memória
     for (int i = 0; i < N; i++) {
