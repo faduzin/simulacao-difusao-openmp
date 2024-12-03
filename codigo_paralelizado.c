@@ -9,7 +9,7 @@
 #define D 0.1  // Coeficiente de difusão
 #define DELTA_T 0.01
 #define DELTA_X 1.0
-#define NUM_THREADS 2
+#define NUM_THREADS 16
 
 void diff_eq(double **C, double **C_new) {
     for (int t = 0; t < T; t++) {
@@ -76,14 +76,19 @@ int main() {
     C[N/2][N/2] = 1.0;
 
     // Executar as iterações no tempo para a equação de difusão
-    clock_t start_parallel = clock();
+	clock_t start = clock();
+	struct timeval inicio, final2;
+	int tmili;
+	gettimeofday(&inicio, NULL);
     diff_eq(C, C_new);
-    clock_t end_parallel = clock();
-    double time_parallel = (double)(end_parallel - start_parallel) / CLOCKS_PER_SEC;
+
+	gettimeofday(&final2, NULL);
+	tmili = (int) (1000 * (final2.tv_sec - inicio.tv_sec) + (final2.tv_usec - inicio.tv_usec) / 1000);
+
 
     // Exibir resultado para verificação
     printf("Concentração final no centro: %f\n", C[N/2][N/2]);
-    printf("Tempo de execução (Parallel): %f segundos\n", time_parallel);
+    printf("Tempo de execução (Parallel): %f segundos\n", (float) tmili/1000);
 
     // Liberar memória
     for (int i = 0; i < N; i++) {

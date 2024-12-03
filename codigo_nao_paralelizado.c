@@ -74,14 +74,18 @@ int main() {
     C[N/2][N/2] = 1.0;
 
     // Executar as iterações no tempo para a equação de difusão
-    clock_t start_serial = clock();
+	clock_t start = clock();
+	struct timeval inicio, final2;
+	int tmili;
+	gettimeofday(&inicio, NULL);
     diff_eq(C, C_new);
-    clock_t end_serial = clock();
-    double time_serial = (double)(end_serial - start_serial)/CLOCKS_PER_SEC;
+
+	gettimeofday(&final2, NULL);
+	tmili = (int) (1000 * (final2.tv_sec - inicio.tv_sec) + (final2.tv_usec - inicio.tv_usec) / 1000);
     
     // Exibir resultado para verificação
     printf("Concentração final no centro: %f\n", C[N/2][N/2]);
-    printf("\nTempo de execucao (Serial): %f segundos\n", time_serial);
+    printf("\nTempo de execucao (Serial): %f segundos\n", (double) tmili/1000);
     
     return 0;
 }
