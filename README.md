@@ -9,9 +9,13 @@ O objetivo deste projeto é simular a equação de difusão utilizando o método
 
 ## Estrutura do Repositório
 
-- **`relatorio.pdf`**: Relatório completo com explicações teóricas, implementação, análise de desempenho e resultados obtidos.
-- **`codigo_nao_paralelizado.c`**: Código C da simulação sequencial (não paralelizado).
-- **`codigo_paralelizado.c`**: Código C da simulação paralelizada utilizando OpenMP.
+- `/relatorios`: Contém diversas versões de relatórios completos, incluindo explicações teóricas, detalhes das implementações, análises de desempenho e resultados obtidos.
+
+- `/codigos`: Reúne os arquivos de implementação em C e CUDA:
+
+   - **`codigo_nao_paralelizado.c`**: Versão sequencial da simulação.  
+   - **`codigo_paralelizado.c`**: Versão paralelizada com OpenMP.  
+   - **`codigo_cuda.cu`**: Nova implementação utilizando CUDA.
 
 ## Métodos e Implementação
 
