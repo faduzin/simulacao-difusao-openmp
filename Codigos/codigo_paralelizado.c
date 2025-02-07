@@ -3,13 +3,14 @@
 #include <math.h>
 #include <omp.h>
 #include <time.h>
+#include <sys/time.h> 
 
 #define N 2000  // Tamanho da grade
 #define T 500 // Número de iterações no tempo
 #define D 0.1  // Coeficiente de difusão
 #define DELTA_T 0.01
 #define DELTA_X 1.0
-#define NUM_THREADS 16
+#define NUM_THREADS 4
 
 void diff_eq(double **C, double **C_new) {
     for (int t = 0; t < T; t++) {
