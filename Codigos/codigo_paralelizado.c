@@ -10,7 +10,7 @@
 #define D 0.1  // Coeficiente de difusão
 #define DELTA_T 0.01 // Passo de tempo
 #define DELTA_X 1.0 // Passo de espaço
-#define NUM_THREADS 4 // Número de threads
+#define NUM_THREADS 8 // Número de threads
 
 void diff_eq(double **C, double **C_new) { // Função para resolver a equação de difusão
     for (int t = 0; t < T; t++) { // Iterar no tempo

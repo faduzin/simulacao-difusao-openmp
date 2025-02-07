@@ -10,6 +10,7 @@
 #define D 0.1 // Coeficiente de difusão
 #define DELTA_T 0.01 // Intervalo de tempo
 #define DELTA_X 1.0 // Espaçamento entre células
+#define NUM_THREADS 8 // Número de threads
 
 // Macro para checagem de erros nas chamadas CUDA
 #define cudaCheckError(ans) { gpuAssert((ans), __FILE__, __LINE__); }
@@ -58,6 +59,7 @@ __global__ void update_kernel(const double *d_C, double *d_C_new, double *d_diff
 
 int main(int argc, char **argv) {
     int rank, size; // Identificador do processo e número total de processos
+    omp_set_num_threads(NUM_THREADS); // Define o número de threads
 
     MPI_Init(&argc, &argv); // Inicializa o ambiente MPI
     MPI_Comm_rank(MPI_COMM_WORLD, &rank); // Pega o rank do processo
